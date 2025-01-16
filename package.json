@@ -9,6 +9,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scripts": "5.0.1",
+    "ttb-todos": "file:",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -34,5 +35,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "ajv": "^7.2.4"
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "keywords": [
+    "todos"
+  ],
+  "author": "Fathima Zulaikha",
+  "license": "ISC"
 }
