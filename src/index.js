@@ -20,4 +20,4 @@ const App = () => {
 
 // Use createRoot instead of ReactDOM.render
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+root.render(<ReduxApp />);
