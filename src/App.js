@@ -4,6 +4,9 @@ import { AppBar, Box, IconButton, Paper, Toolbar, Typography } from '@mui/materi
 import Container from '@mui/material/Container';
 import { makeStyles } from '@mui/styles';
 
+import TodoAdder from './components/todo-adder';
+import TodosContainer from "./components/todos-container";
+
 /* We are going to add styles using JSS instead of CSS */
 const useStyles = makeStyles((theme) => ({
     root: {},
@@ -30,7 +33,7 @@ export default function TTBTodos() {
                 }}
             >
                 <Toolbar>
-                    <IconButton edge="start" color="inherit">
+                    <IconButton edge="start">
                         <img  
                             alt="TickTickBoom Todos logo"
                             style={{
@@ -48,7 +51,10 @@ export default function TTBTodos() {
                 {/* The Paper component is a container for displaying content on an elevated surface */}
                 <Paper className={classes.wrapper} elevation={0}>
                     {/* A component to add todos - "TodoAdder" */}
+                    <TodoAdder />
+
                     {/* The container area to display all todos - "TodosContainer*/} 
+                    <TodosContainer />
                 </Paper>
             </Container>
         </Box>
