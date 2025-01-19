@@ -11,15 +11,20 @@ import { useDispatch } from 'react-redux';
 */
 export default function TodoAdder() {
     const [title, setTitle] = useState(null);
+    const dispatch = useDispatch();
 
     function handleTextChange(e) {
         setTitle(e.target.value);
     }
 
     function addTodoItem() {
-        // We need to dispatch the ADD_TODO reduc action here 
-        // We will come back here once the todo items are listed
-
+      dispatch({
+        type: ADD_TODO,
+        payload: {
+          title,
+        },
+      });
+      setTitle(null);
     }
 
     return (

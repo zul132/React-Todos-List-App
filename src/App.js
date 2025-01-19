@@ -52,7 +52,6 @@ export default function TTBTodos() {
                 <Paper className={classes.wrapper} elevation={0}>
                     {/* A component to add todos - "TodoAdder" */}
                     <TodoAdder />
-
                     {/* The container area to display all todos - "TodosContainer*/} 
                     <TodosContainer />
                 </Paper>
