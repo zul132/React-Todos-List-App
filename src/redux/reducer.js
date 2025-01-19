@@ -1,7 +1,7 @@
 /*
     After the Action is served by the Middleware, the execution comes to the Reducer.
 */
-import { ADD_TODO, TOGGLE_COMPLETED } from "./actions";
+import { ADD_TODO, DELETE_TODO, TOGGLE_COMPLETED } from "./actions";
 import { initialState } from "./initial-state";
 
 // We use the shortid library to generate a random unique id for our new todo
@@ -44,6 +44,18 @@ function reducer(state = initialState, action) {
 
             return newState;
         }
+        case DELETE_TODO: {
+            const { id } = action.payload;
+            const newTodos = state.todos.filter((todo) => todo.id !== id);
+
+            const newState = {
+                ...state,
+                todos: newTodos,
+            };
+
+            return newState;
+        }
+
         default:
             return state;
     }

@@ -1,8 +1,9 @@
-import { Checkbox, FormControlLabel, FormGroup, ListItem, Typography } from '@mui/material';
+import { Box, Checkbox, FormControlLabel, FormGroup, IconButton, ListItem, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { TOGGLE_COMPLETED } from '../redux/actions';
+import { DELETE_TODO, TOGGLE_COMPLETED } from '../redux/actions';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function TodoItem({ id, title, completed, important }) {
     const dispatch = useDispatch();
@@ -11,6 +12,16 @@ export default function TodoItem({ id, title, completed, important }) {
     function toggleCheckBox() {
         dispatch({
             type: TOGGLE_COMPLETED,
+            payload: {
+                id,
+            },
+        });
+    }
+
+    // function to delete a particular todo
+    function handleDeleteClick() {
+        dispatch({
+            type: DELETE_TODO,
             payload: {
                 id,
             },
@@ -38,6 +49,12 @@ export default function TodoItem({ id, title, completed, important }) {
                   </Typography>}
                 ></FormControlLabel>
             </FormGroup>
+            {/* Replace ListItemSecondaryAction */}
+            <Box sx={{ marginLeft: "auto" }}>
+                <IconButton onClick={handleDeleteClick} edge="end">
+                    <DeleteIcon />
+                </IconButton>
+            </Box>
         </ListItem>
     );
 };
