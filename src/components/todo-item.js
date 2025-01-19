@@ -1,11 +1,20 @@
-import { Checkbox, FormControlLabel, FormGroup, ListItem } from '@mui/material';
+import { Checkbox, FormControlLabel, FormGroup, ListItem, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
+import { useDispatch } from 'react-redux';
+import { TOGGLE_COMPLETED } from '../redux/actions';
+
 export default function TodoItem({ id, title, completed, important }) {
+    const dispatch = useDispatch();
 
     // function to toggle the checkbox when it is pressed by the user
     function toggleCheckBox() {
-        // Todo - need to dispatch TOGGLE action
+        dispatch({
+            type: TOGGLE_COMPLETED,
+            payload: {
+                id,
+            },
+        });
     }
 
     return (
@@ -19,7 +28,14 @@ export default function TodoItem({ id, title, completed, important }) {
                       onChange={toggleCheckBox}
                     />
                   }
-                  label={title}
+                  label={
+                    <Typography
+                      style= {{
+                        textDecoration: completed && "line-through",
+                      }}
+                    > 
+                      {title}
+                  </Typography>}
                 ></FormControlLabel>
             </FormGroup>
         </ListItem>
