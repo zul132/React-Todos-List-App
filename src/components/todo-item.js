@@ -2,8 +2,12 @@ import { Box, Checkbox, FormControlLabel, FormGroup, IconButton, ListItem, Typog
 import React, { useState } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { DELETE_TODO, TOGGLE_COMPLETED } from '../redux/actions';
+import { DELETE_TODO, TOGGLE_COMPLETED, TOGGLE_IMPORTANT } from '../redux/actions';
+
+// Import icons for deleting todos and marking todos as important
 import DeleteIcon from '@mui/icons-material/Delete';
+import StarIcon from '@mui/icons-material/Star';
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
 
 export default function TodoItem({ id, title, completed, important }) {
     const dispatch = useDispatch();
@@ -22,6 +26,16 @@ export default function TodoItem({ id, title, completed, important }) {
     function handleDeleteClick() {
         dispatch({
             type: DELETE_TODO,
+            payload: {
+                id,
+            },
+        });
+    }
+
+    // function to toggle the todo's importance when user presses the star
+    function toggleImportant() {
+        dispatch({
+            type:  TOGGLE_IMPORTANT,
             payload: {
                 id,
             },
@@ -51,6 +65,10 @@ export default function TodoItem({ id, title, completed, important }) {
             </FormGroup>
             {/* Replace ListItemSecondaryAction */}
             <Box sx={{ marginLeft: "auto" }}>
+                <IconButton onClick={toggleImportant} edge="end">
+                    {/* Filled star is used to indicate important todos, while an Outlined star is used for the other todos */}
+                    {important ? <StarIcon /> : <StarOutlineIcon /> }
+                </IconButton>
                 <IconButton onClick={handleDeleteClick} edge="end">
                     <DeleteIcon />
                 </IconButton>

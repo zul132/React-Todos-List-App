@@ -26,7 +26,21 @@ export default function TodosContainer() {
         };
     });
 
-    console.log(todos);
+    const prioritisedTodos = (function prioritise() {
+        const importantTodos = [];
+        const notImportantTodos = [];
+
+        todos.forEach(todo => {
+            if (todo.important) {
+                importantTodos.push(todo);
+            } 
+            else {
+                notImportantTodos.push(todo);
+            }
+        });
+
+        return importantTodos.concat(notImportantTodos);
+    })();
 
     return (
         <Box className={classes.root}>
@@ -37,7 +51,7 @@ export default function TodosContainer() {
                     </Typography>
                     <Divider />
                     <List>
-                        {todos.map(todo => {
+                        {prioritisedTodos.map(todo => {
                             if (!todo.completed) {
                                 return <TodoItem {...todo} />;
                             } else {
@@ -52,7 +66,7 @@ export default function TodosContainer() {
                     </Typography>
                     <Divider />
                     <List>
-                        {todos.map(todo => {
+                        {prioritisedTodos.map(todo => {
                             if (todo.completed) {
                                 return <TodoItem {...todo} />;
                             } else {
