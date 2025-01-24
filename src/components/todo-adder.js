@@ -1,5 +1,5 @@
 import { Box, Button, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { ADD_TODO } from '../redux/actions';
 import { useDispatch } from 'react-redux';
@@ -11,6 +11,8 @@ import { useDispatch } from 'react-redux';
 */
 export default function TodoAdder() {
     const [title, setTitle] = useState(null);
+    const titleFieldRef = useRef(null);
+
     const dispatch = useDispatch();
 
     function handleTextChange(e) {
@@ -18,13 +20,18 @@ export default function TodoAdder() {
     }
 
     function addTodoItem() {
-      dispatch({
-        type: ADD_TODO,
-        payload: {
-          title,
-        },
-      });
-      setTitle(null);
+      /* Check if the user has typed anything in the Textfield before adding a new todo item */
+      if (title) {
+        dispatch({
+          type: ADD_TODO,
+          payload: {
+            title,
+          },
+        });
+        setTitle(null);
+        // clear the Textfield after new todo item is added
+        titleFieldRef.current.value = "";
+      }
     }
 
     return (
@@ -33,18 +40,25 @@ export default function TodoAdder() {
             style={{
               width: 400,
             }} 
+            inputRef={titleFieldRef}
             label="Add new todo" 
             variant="filled"
             onChange={handleTextChange}
           ></TextField>
-          <Button 
+          <Button
             style={{
               height: 55,
-            }} 
-            variant="contained" 
+            }}
+            variant="contained"
             onClick={addTodoItem}
             sx={{
-                backgroundColor: "#935dff" 
+              backgroundColor: "#935dff", // Default color
+              "&:hover": {
+                backgroundColor: "#7d4de0", // Slightly darker shade on hover
+              },
+              "&:active": {
+                backgroundColor: "#683bb8", // Even darker shade when clicked
+              },
             }}
           >
             Add
@@ -52,5 +66,3 @@ export default function TodoAdder() {
         </Box>
     );
 };
-
-
