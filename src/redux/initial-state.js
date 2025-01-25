@@ -1,7 +1,10 @@
 /* 
     Depicts what the initial state will be when the app loads
 */
-export const initialState = {
+
+// We need to convert the browser's local state into a JSON object
+export const initialState = JSON.parse(
+  window.localStorage.getItem("ttb-todos")) || {
     todos: [
       {
         id: 0,

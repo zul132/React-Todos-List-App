@@ -7,6 +7,11 @@ import { initialState } from "./initial-state";
 // We use the shortid library to generate a random unique id for our new todo
 import shortid from "shortid";
 
+/* We will save the new state of our Todos app in our Browser's local storage */
+function saveStateToBrowser(state) {
+    window.localStorage.setItem("ttb-todos", JSON.stringify(state));
+}
+
 // reducer is a pure function which takes in a previous state and an action, and it produces a new state.
 // Everytime you create a reducer function, you have to return the particular state
 function reducer(state = initialState, action) {
@@ -27,6 +32,7 @@ function reducer(state = initialState, action) {
                 ],
             };
 
+            saveStateToBrowser(newState);
             return newState;
         }
         case TOGGLE_COMPLETED: {
@@ -42,6 +48,7 @@ function reducer(state = initialState, action) {
                 todos: newTodos,
             };
 
+            saveStateToBrowser(newState);
             return newState;
         }
         case DELETE_TODO: {
@@ -53,6 +60,7 @@ function reducer(state = initialState, action) {
                 todos: newTodos,
             };
 
+            saveStateToBrowser(newState);
             return newState;
         }
         case TOGGLE_IMPORTANT: {
@@ -68,6 +76,7 @@ function reducer(state = initialState, action) {
                 todos: newTodos,
             };
 
+            saveStateToBrowser(newState);
             return newState;
         } 
         default:
