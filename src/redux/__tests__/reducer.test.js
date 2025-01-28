@@ -40,15 +40,39 @@ describe("Reducer", () => {
             },
         };
 
+        // When you call reducer(), it should add the sample todo that we provided
         const newState = reducer(initialState, action);
 
-        // Add a few expectations to the test
+        // Add expectations to the test
         expect(newState.todos[0].title).toEqual("Read a book");
-
+        /* By default, the new todo will not be marked completed and not marked important */
+        expect(newState.todos[0].completed).toBeFalsy();    
+        expect(newState.todos[0].important).toBeFalsy();
     });
 
     test("should mark todo as completed", () => {
+        const initialState = {
+          todos: [
+            {
+              id: "12345",
+              title: "Read a book",
+              completed: false,
+              important: false,
+            },   
+          ],
+        };
 
+        const action = {
+            type: "TOGGLE_COMPLETED",
+            payload: {
+                id: "12345",
+            },
+        };
+
+        // When you call reducer(), it should mark the todos with id "12345" as completed
+        const newState = reducer(initialState, action);
+
+        expect(newState.todos[0].completed).toBeTruthy();
     });
 });
 
